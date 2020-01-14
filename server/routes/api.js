@@ -18,19 +18,119 @@ router.use((req, res, next) => {
     next()
 })
 // define the home page route
-router.get('/',  (req, res)=> {
+router.get('/', (req, res) => {
     res.send(' home page')
 })
 
-router.get('/test',  (req, res)=> {
+router.get('/test', (req, res) => {
     res.send('API test page')
 })
+
+router.get('/events', (req, res) => {
+    let events = [
+        {
+            "_id": "1",
+            "name": "Auto Expo",
+            "description": "lorem ipsum",
+            "date": "2012-04-23T18:25:43.511Z"
+        },
+        {
+            "_id": "2",
+            "name": "Auto Expo",
+            "description": "lorem ipsum",
+            "date": "2012-04-23T18:25:43.511Z"
+        },
+        {
+            "_id": "3",
+            "name": "Auto Expo",
+            "description": "lorem ipsum",
+            "date": "2012-04-23T18:25:43.511Z"
+        },
+        {
+            "_id": "4",
+            "name": "Auto Expo",
+            "description": "lorem ipsum",
+            "date": "2012-04-23T18:25:43.511Z"
+        },
+        {
+            "_id": "5",
+            "name": "Auto Expo",
+            "description": "lorem ipsum",
+            "date": "2012-04-23T18:25:43.511Z"
+        },
+        {
+            "_id": "6",
+            "name": "Auto Expo",
+            "description": "lorem ipsum",
+            "date": "2012-04-23T18:25:43.511Z"
+        }
+    ]
+    res.json(events)
+})
+function verifyToken(req, res, next) {
+    if(!req.headers.authorization) {
+      return res.status(401).send('Unauthorized request')
+    }
+    let token = req.headers.authorization.split(' ')[1]
+    if(token === 'null') {
+      return res.status(401).send('Unauthorized request')    
+    }
+    let payload = jwt.verify(token, 'secretKey')
+    if(!payload) {
+      return res.status(401).send('Unauthorized request')    
+    }
+    req.userId = payload.subject
+    next()
+  }
+
+router.get('/special', verifyToken, (req, res) => {
+    let specialEvents = [
+        {
+            "_id": "1",
+            "name": "Auto Expo Special",
+            "description": "lorem ipsum",
+            "date": "2012-04-23T18:25:43.511Z"
+        },
+        {
+            "_id": "2",
+            "name": "Auto Expo Special",
+            "description": "lorem ipsum",
+            "date": "2012-04-23T18:25:43.511Z"
+        },
+        {
+            "_id": "3",
+            "name": "Auto Expo Special",
+            "description": "lorem ipsum",
+            "date": "2012-04-23T18:25:43.511Z"
+        },
+        {
+            "_id": "4",
+            "name": "Auto Expo Special",
+            "description": "lorem ipsum",
+            "date": "2012-04-23T18:25:43.511Z"
+        },
+        {
+            "_id": "5",
+            "name": "Auto Expo Special",
+            "description": "lorem ipsum",
+            "date": "2012-04-23T18:25:43.511Z"
+        },
+        {
+            "_id": "6",
+            "name": "Auto Expo Special",
+            "description": "lorem ipsum",
+            "date": "2012-04-23T18:25:43.511Z"
+        }
+    ]
+    res.json(specialEvents)
+})
+
 // define the about route
-router.post('/register',  (req, res) => {
+router.post('/register', (req, res) => {
     let userData = req.body;
     let user = new User(userData);
-    user.save((err,registeredUser)=>{
-        if(err) {
+    user.save((err, registeredUser) => {
+        if (err) {
             console.log(err)
         } else {
             let payload = { subject: registeredUser._id };
