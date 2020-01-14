@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+#   ngapi:
+#     container_name: ngapi
+#     restart: always
+#     build: ./server
+#     command: 'node server.js'
+#     ports: 
+#         - "8090:80"
+#     volumes: 
+#         - ./server:/usr/src/app
+#         - /usr/src/app/node_modules
+
+    
+  ngapp:
+    container_name: ngapp
+    restart: always
+    build: ./ngApp
+    command: 'ng build --prod'
+    ports:
+      - "8080:4200"
+    volumes: 
+      - ./ngApp:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/dist
+      - /usr/share/nginx/html
+    # depends_on:
+    #   - ngapp.api
