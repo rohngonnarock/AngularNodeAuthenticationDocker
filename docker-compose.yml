@@ -2,8 +2,8 @@ version: '3.4'
 
 services:
   ngapi:
-    container_name: ngapi
     build: ./server
+    image: cntrregistery.azurecr.io/ngapi
     command: 'node server.js'
     ports: 
         - "8090:80"
@@ -13,16 +13,16 @@ services:
 
     
   ngapp:
-    container_name: ngapp
     build: ./ngApp
+    image: cntrregistery.azurecr.io/ngapp
     ports:
       - "8080:80"
     volumes: 
       - ./ngApp:/usr/src/app
       - /usr/src/app/node_modules
       - /usr/src/app/dist
-    # depends_on:
-    #   - ngapp.api
+    depends_on:
+      - ngapi
 
   # web:
   #   image: nginx:1.16.1-alpine

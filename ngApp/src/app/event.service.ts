@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class EventService {
 
-  private _eventsUrl = "http://localhost:8090/api/events";
-  private _specialEventsUrl = "http://localhost:8090/api/special";
+  private _eventsUrl = "https://ngapi.azurewebsites.net/api/events";
+  private _specialEventsUrl = "https://ngapi.azurewebsites.net/api/special";
 
   constructor(private http: HttpClient) { }
 

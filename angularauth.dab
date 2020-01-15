@@ -1,0 +1,33 @@
+{
+  "Services": {
+    "ngapi": {
+      "Args": [
+        "node",
+        "server.js"
+      ],
+      "Image": "cntrregistery.azurecr.io/ngapi@sha256:60e5b09fecd60b367444e92064e096dd0e7483faa86bd8a788839ada314f958c",
+      "Networks": [
+        "default"
+      ],
+      "Ports": [
+        {
+          "Port": 80,
+          "Protocol": "tcp"
+        }
+      ]
+    },
+    "ngapp": {
+      "Image": "cntrregistery.azurecr.io/ngapp@sha256:62944e0a824484b5cfe7bff59c0fea62e35bb1a51bcdf2d7734b867d046583b7",
+      "Networks": [
+        "default"
+      ],
+      "Ports": [
+        {
+          "Port": 80,
+          "Protocol": "tcp"
+        }
+      ]
+    }
+  },
+  "Version": "0.1"
+}
