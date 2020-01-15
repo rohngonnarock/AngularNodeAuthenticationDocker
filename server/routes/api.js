@@ -134,7 +134,7 @@ router.post('/register', (req, res) => {
             console.log(err)
         } else {
             let payload = { subject: registeredUser._id };
-            let token = jwt.sign(payload, 'secretkey')
+            let token = jwt.sign(payload, 'secretKey')
             res.status(200).send({ token });
         }
     })
@@ -152,7 +152,7 @@ router.post('/login', (req, res) => {
                 res.status(401).send("invalid password");
             } else {
                 let payload = { subject: user._id }
-                let token = jwt.sign(payload, 'secretkey');
+                let token = jwt.sign(payload, 'secretKey');
                 res.status(200).send({ token })
             }
         }
