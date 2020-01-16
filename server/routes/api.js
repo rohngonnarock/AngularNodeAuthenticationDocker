@@ -1,11 +1,21 @@
-var express = require('express')
-var router = express.Router()
-const User = require('../models/user');
-const mongoose = require('mongoose');
-const dbUrl = require('../config/db.config')
-const jwt = require('jsonwebtoken');
+// var express = require('express')
+// var router = express.Router()
+// const User = require('../models/user');
+// const mongoose = require('mongoose');
+// const dbUrl = require('../config/db.config')
+// const jwt = require('jsonwebtoken');
 
-mongoose.connect(dbUrl, { useNewUrlParser: true }).then(() => {
+
+import express from 'express';
+var router = express.Router()
+import User from '../models/user';
+import mongoose from 'mongoose';
+import dbUrl from  '../config/db.config';
+import jwt from 'jsonwebtoken';
+
+
+
+mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
     console.log("Successfully connected to the database");
 }).catch(err => {
     console.log('Could not connect to the database. Exiting now...', err);
@@ -159,7 +169,7 @@ router.post('/login', (req, res) => {
     })
 })
 
-module.exports = router
+export default router
 
 //curl -H "Content-Type: application/json" -X POST -d {\"email\":\"mkyong\",\"password\":\"abc\"} http://localhost:8050/api/register/
 //curl -H "Content-Type: application/json" -X POST -d {\"email\":\"mkyong\",\"password\":\"abc\"} http://localhost:8050/api/login/

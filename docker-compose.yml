@@ -4,23 +4,23 @@ services:
   ngapi:
     build: ./server
     image: cntrregistery.azurecr.io/ngapi
-    command: 'npm start'
     ports: 
         - "8090:80"
     volumes: 
         - ./server:/usr/src/app1
         - /usr/src/app1/node_modules
-        - /usr/src/app1/dist
+        - /usr/src/app1/dist:/usr/src/app2
+        - /usr/src/app2
 
     
-  ngapp:
-    build: ./ngApp
-    image: cntrregistery.azurecr.io/ngapp
-    ports:
-      - "8080:80"
-    volumes: 
-      - ./ngApp:/usr/src/app
-      - /usr/src/app/node_modules
-      - /usr/src/app/dist
-    depends_on:
-      - ngapi
+  # ngapp:
+  #   build: ./ngApp
+  #   image: cntrregistery.azurecr.io/ngapp
+  #   ports:
+  #     - "8080:80"
+  #   volumes: 
+  #     - ./ngApp:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #     - /usr/src/app/dist
+  #   depends_on:
+  #     - ngapi
