@@ -2,11 +2,13 @@ import { Component, OnInit, DebugElement } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  providers: [MessageService]
 })
 export class LoginComponent implements OnInit {
 
@@ -24,7 +26,7 @@ export class LoginComponent implements OnInit {
     ]),
   });
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
   }
@@ -40,7 +42,9 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', res.token);
           this.router.navigate(['/special']);
         },
-        err => console.log(err)
+        err => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: err.statusText });
+        }
       );
   }
 }
