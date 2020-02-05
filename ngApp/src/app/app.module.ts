@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { EventService } from './event.service';
 import { TokenInterceptorService } from './token-interceptor.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService, AuthGuard, EventService,
     {
