@@ -14,7 +14,7 @@ import { EventService } from './event.service';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
